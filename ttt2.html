@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe - Part 2</title>
+<style>
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+  }
+  .square {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    background-color: #f0f0f0;
+  }
+  .square:hover {
+    background-color: lightgray;
+  }
+  .status, .winner {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<h1>Cool Tic Tac Toe Game</h1>
+<div class="board"></div>
+<div class="status">Player's turn: X</div>
+<div class="winner">Win condition here</div>
+
+<script>
+const NUM_SQUARES = 9;
+for (let i = 0; i < NUM_SQUARES; i++) {
+  let id = "sq" + i;
+  document.write("<div class='square' id='" + id + "'></div>");
+}
+</script>
+</body>
+</html>
