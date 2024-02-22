@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: repeat(3, 100px); /* 3 columns */
     grid-gap: 5px; /* 5px gap between squares */
+    margin: auto;
   }
   .square {
     width: 100px;
@@ -24,61 +25,60 @@
     background-color: lightgray;
   }
   .status {
-    border: 1px solid black;
-    padding: 10px;
+    text-align: center;
     margin-top: 10px;
   }
 </style>
 </head>
 <body>
-<h1>Cool Tic Tac Toe Game</h1>
+<h1 style="text-align: center;">Cool Tic Tac Toe Game</h1>
 <div id="board" class="board"></div>
-<div class="status">Player's turn: X</div>
+<div id="turnIndicator" class="status">Player's turn: X</div>
+<button id="startGame" style="display: block; margin: 20px auto;">Start Game</button>
+
 <script>
-// Initial setup
 let currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; // Randomly choose the starting player
-const board = document.querySelector('.board');
+const board = document.getElementById('board');
 const turnIndicator = document.getElementById('turnIndicator');
-const squares = [];
 const gameState = Array(9).fill(null);
 
-// Update the turn indicator to show the current player
-turnIndicator.textContent = `Turn: ${currentPlayer}`;
+turnIndicator.textContent = `Player's turn: ${currentPlayer}`;
 
-// Function to create the board
 function createBoard() {
     board.innerHTML = ''; // Clear the board
-    for (let i = 0; i < 9; i++) {
+    gameState.forEach((cell, index) => {
         const square = document.createElement('div');
-        square.classList.add('square');
-        square.addEventListener('click', () => handleSquareClick(i));
+        square.className = 'square';
+        square.addEventListener('click', function() { handleSquareClick(index); });
+        square.textContent = cell;
         board.appendChild(square);
-        squares.push(square);
-    }
+    });
 }
 
-// Handle square click
 function handleSquareClick(index) {
-    if (gameState[index] === null) {
-        gameState[index] = currentPlayer; // Mark the square with the current player's symbol
-        squares[index].textContent = currentPlayer; // Display the symbol on the board
-        alert(`Square ${index} clicked.`); // Display popup with the square number
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // Switch turns
-        turnIndicator.textContent = `Turn: ${currentPlayer}`; // Update turn indicator
-    } else {
-        alert("This square is already taken. Please choose another.");
+    if (gameState[index] || checkDraw()) {
+        // Square already filled or game is over, do nothing
+        return;
     }
+    gameState[index] = currentPlayer; // Mark the square
+    alert(`Square ${index} clicked.`);
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // Switch turns
+    turnIndicator.textContent = `Player's turn: ${currentPlayer}`; // Update turn indicator
+    createBoard(); // Re-render the board to show updated state
 }
 
-// Start/restart the game
-document.getElementById('startGame').addEventListener('click', () => {
-    gameState.fill(null); // Reset game state
-    currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; // Randomly choose the starting player again
-    turnIndicator.textContent = `Turn: ${currentPlayer}`; // Update turn indicator
-    squares.forEach(square => square.textContent = ''); // Clear all squares
+function checkDraw() {
+    return gameState.every(cell => cell !== null);
+}
+
+document.getElementById('startGame').addEventListener('click', function() {
+    gameState.fill(null); // Clear the game state
+    currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; // Randomly choose who starts
+    turnIndicator.textContent = `Player's turn: ${currentPlayer}`; // Update turn indicator
+    createBoard(); // Re-render the board
 });
 
-createBoard(); // Create the board initially
+createBoard(); // Initial board setup
 </script>
 </body>
 </html>
