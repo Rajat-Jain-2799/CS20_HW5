@@ -5,14 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tic Tac Toe - Part 2</title>
 <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px); /* Creates 3 columns */
-    grid-gap: 5px; /* Space between squares */
-    justify-content: center; /* Center grid horizontally */
-    margin: auto; /* Center grid in the available space */
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-top: 20px;
   }
-
   .square {
     width: 100px;
     height: 100px;
@@ -29,7 +32,7 @@
     border: 1px solid black;
     padding: 10px;
     margin-top: 10px;
-    text-align: center; /* Center-align text for status and winner */
+    text-align: center;
   }
 </style>
 </head>
@@ -48,3 +51,4 @@ for (let i = 0; i < NUM_SQUARES; i++) {
 </script>
 </body>
 </html>
+
