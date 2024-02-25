@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tic Tac Toe - Simplified</title>
 <style>
+  /* Style adjustments to ensure the squares appear inside the .board div */
   .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-gap: 5px;
+    grid-template-columns: repeat(3, 100px); /* Creates 3 columns */
+    grid-gap: 5px; /* Space between squares */
+    max-width: fit-content; /* Ensures the board does not stretch */
+    margin: 0 auto; /* Centers the board horizontally */
   }
   .square {
     width: 100px;
@@ -25,6 +28,7 @@
   }
   .status {
     margin-top: 10px;
+    text-align: center; /* Ensures the status text is centered */
   }
 </style>
 </head>
@@ -32,10 +36,11 @@
 <h1>Simple Tic Tac Toe Game</h1>
 <div id="board" class="board">
 <script>
+// This script injects the squares directly into the body, outside the .board div
 const NUM_SQUARES = 9;
-for (let i=0; i<NUM_SQUARES; i++) {
-  const id = "sq" + i;
-  document.write(`<div class='square' id='${id}'></div>`);
+for (i = 0; i < NUM_SQUARES; i++) {
+  id = "sq" + i;
+  document.write("<div class='square' id='" + id + "'></div>");
 }
 </script>
 </div>
@@ -77,4 +82,3 @@ attachEventListeners();
 </script>
 </body>
 </html>
-
