@@ -43,18 +43,33 @@ for (i = 0; i < NUM_SQUARES; i++) {
 </script>
 </div>
 <div class="status">Player's turn: X</div>
-<button id="restart">Restart Game</button>
-
+<button id="startGame">Start Game</button> <!-- Added Start Game button -->
 <script>
 const statusDiv = document.querySelector('.status');
-const restart = document.getElementById('restart');
-let currentPlayer = "X";
+const startGameBtn = document.getElementById('startGame');
+let currentPlayer;
 let gameState = Array(9).fill(null);
 
+// Function to randomly choose the starting player
+function chooseStartingPlayer() {
+  currentPlayer = Math.random() < 0.5 ? "X" : "O";
+  statusDiv.textContent = `Player's turn: ${currentPlayer}`;
+}
+
+// Modified restartGame function to also choose starting player
+function restartGame() {
+  gameState.fill(null);
+  chooseStartingPlayer(); // Choose starting player randomly
+  for (let i = 0; i < NUM_SQUARES; i++) {
+    document.getElementById(`sq${i}`).textContent = '';
+  }
+}
+
+// Attach event listeners to squares
 function attachEventListeners() {
   for (let i = 0; i < NUM_SQUARES; i++) {
     const square = document.getElementById(`sq${i}`);
-    square.addEventListener('click', function() { handleClick(i); });
+    square.onclick = function() { handleClick(i); }; // Using onclick for simplicity
   }
 }
 
@@ -62,22 +77,19 @@ function handleClick(index) {
   if (gameState[index] || !currentPlayer) return;
   gameState[index] = currentPlayer;
   document.getElementById(`sq${index}`).textContent = currentPlayer;
-  alert(`It's ${currentPlayer === "X" ? "O" : "X"}'s turn next!`);
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
 }
 
-function restartGame() {
-  gameState.fill(null);
-  currentPlayer = "X";
-  statusDiv.textContent = "Player's turn: X";
-  for (let i = 0; i < NUM_SQUARES; i++) {
-    document.getElementById(`sq${i}`).textContent = '';
-  }
+// Initialize game
+function initializeGame() {
+  attachEventListeners();
+  chooseStartingPlayer(); // Randomly choose who starts
 }
 
-restart.addEventListener('click', restartGame);
-attachEventListeners();
+startGameBtn.addEventListener('click', restartGame);
+
+initializeGame(); // Start the game initially
 </script>
 </body>
 </html>
