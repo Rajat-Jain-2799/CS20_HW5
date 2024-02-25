@@ -16,11 +16,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px; /* Adds padding around the container */
+    border-radius: 10px; /* Rounds the corners of the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
   }
   .board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-gap: 5px;
+    margin-bottom: 20px; /* Adds space between the board and the status message */
   }
   .square {
     width: 100px;
@@ -35,8 +39,11 @@
   .square:hover {
     background-color: lightgray;
   }
-  .status, #restartBtn {
-    margin-top: 10px;
+  .status {
+    margin-top: 10px; /* Adjusts spacing above the status message for clarity */
+  }
+  #restartBtn {
+    margin-top: 20px; /* Increases spacing above the restart button for clear separation */
   }
 </style>
 </head>
