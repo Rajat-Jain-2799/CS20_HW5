@@ -43,7 +43,7 @@
 
 <script>
 const statusDiv = document.querySelector('.status');
-const restartBtn = document.getElementById('restartBtn');
+const restart = document.getElementById('restartBtn');
 let currentPlayer = "X";
 let gameState = Array(9).fill(null);
 let gameActive = true;
@@ -101,7 +101,7 @@ function restartGame() {
   }
 }
 
-restartBtn.addEventListener('click', restartGame);
+restart.addEventListener('click', restartGame);
 attachEventListeners();
 </script>
 </body>
