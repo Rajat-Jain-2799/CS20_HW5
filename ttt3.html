@@ -5,13 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tic Tac Toe - Simplified</title>
 <style>
-  /* Style adjustments to ensure the squares appear inside the .board div */
   .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px); /* Creates 3 columns */
-    grid-gap: 5px; /* Space between squares */
-    max-width: fit-content; /* Ensures the board does not stretch */
-    margin: 0 auto; /* Centers the board horizontally */
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    max-width: fit-content;
+    margin: 0 auto;
   }
   .square {
     width: 100px;
@@ -28,7 +27,7 @@
   }
   .status {
     margin-top: 10px;
-    text-align: center; /* Ensures the status text is centered */
+    text-align: center;
   }
 </style>
 </head>
@@ -36,7 +35,6 @@
 <h1>Simple Tic Tac Toe Game</h1>
 <div id="board" class="board">
 <script>
-// This script injects the squares directly into the body, outside the .board div
 const NUM_SQUARES = 9;
 for (i = 0; i < NUM_SQUARES; i++) {
   id = "sq" + i;
@@ -45,18 +43,18 @@ for (i = 0; i < NUM_SQUARES; i++) {
 </script>
 </div>
 <div class="status">Player's turn: X</div>
-<button id="restartBtn">Restart Game</button>
+<button id="restart">Restart Game</button>
 
 <script>
 const statusDiv = document.querySelector('.status');
-const restartBtn = document.getElementById('restartBtn');
+const restart = document.getElementById('restart');
 let currentPlayer = "X";
 let gameState = Array(9).fill(null);
 
 function attachEventListeners() {
   for (let i = 0; i < NUM_SQUARES; i++) {
     const square = document.getElementById(`sq${i}`);
-    square.addEventListener('click', () => handleClick(i));
+    square.addEventListener('click', function() { handleClick(i); });
   }
 }
 
@@ -64,6 +62,7 @@ function handleClick(index) {
   if (gameState[index] || !currentPlayer) return;
   gameState[index] = currentPlayer;
   document.getElementById(`sq${index}`).textContent = currentPlayer;
+  alert(`It's ${currentPlayer === "X" ? "O" : "X"}'s turn next!`);
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
 }
@@ -72,12 +71,12 @@ function restartGame() {
   gameState.fill(null);
   currentPlayer = "X";
   statusDiv.textContent = "Player's turn: X";
-  gameState.forEach((_, index) => {
-    document.getElementById(`sq${index}`).textContent = '';
-  });
+  for (let i = 0; i < NUM_SQUARES; i++) {
+    document.getElementById(`sq${i}`).textContent = '';
+  }
 }
 
-restartBtn.addEventListener('click', restartGame);
+restart.addEventListener('click', restartGame);
 attachEventListeners();
 </script>
 </body>
