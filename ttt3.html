@@ -30,45 +30,50 @@
 </head>
 <body>
 <h1>Simple Tic Tac Toe Game</h1>
-<div id="board" class="board"></div>
+<div id="board" class="board">
+<script>
+const NUM_SQUARES = 9;
+for (let i=0; i<NUM_SQUARES; i++) {
+  const id = "sq" + i;
+  document.write(`<div class='square' id='${id}'></div>`);
+}
+</script>
+</div>
 <div class="status">Player's turn: X</div>
 <button id="restartBtn">Restart Game</button>
 
 <script>
-const board = document.getElementById('board');
 const statusDiv = document.querySelector('.status');
 const restartBtn = document.getElementById('restartBtn');
 let currentPlayer = "X";
 let gameState = Array(9).fill(null);
 
-function drawBoard() {
-  board.innerHTML = '';
-  gameState.forEach((cell, index) => {
-    const square = document.createElement('div');
-    square.className = 'square';
-    square.textContent = cell;
-    square.addEventListener('click', () => handleClick(index));
-    board.appendChild(square);
-  });
+function attachEventListeners() {
+  for (let i = 0; i < NUM_SQUARES; i++) {
+    const square = document.getElementById(`sq${i}`);
+    square.addEventListener('click', () => handleClick(i));
+  }
 }
 
 function handleClick(index) {
   if (gameState[index] || !currentPlayer) return;
   gameState[index] = currentPlayer;
+  document.getElementById(`sq${index}`).textContent = currentPlayer;
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
-  drawBoard();
 }
 
 function restartGame() {
   gameState.fill(null);
   currentPlayer = "X";
   statusDiv.textContent = "Player's turn: X";
-  drawBoard();
+  gameState.forEach((_, index) => {
+    document.getElementById(`sq${index}`).textContent = '';
+  });
 }
 
 restartBtn.addEventListener('click', restartGame);
-drawBoard();
+attachEventListeners();
 </script>
 </body>
 </html>
