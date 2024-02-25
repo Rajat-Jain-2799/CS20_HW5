@@ -47,15 +47,17 @@
 <body>
 <div class="game-container"> 
   <div id="board" class="board">
+    <script>
+    const NUM_SQUARES = 9;
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      document.write(`<div class='square' id='sq${i}'></div>`);
+    }
+  </script>
   </div>
   <div class="status">Player's turn: X</div>
   <button id="restartBtn">Restart Game</button>
 </div>
 <script>
-  const NUM_SQUARES = 9;
-  for (let i = 0; i < NUM_SQUARES; i++) {
-     document.write(`<div class='square' id='sq${i}'></div>`);
-  }
 const statusDiv = document.querySelector('.status');
 const restart = document.getElementById('restartBtn');
 let currentPlayer = "X";
