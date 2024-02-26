@@ -73,7 +73,7 @@
 const statusDiv = document.querySelector('.status');
 const restart = document.getElementById('restart');
 let currentPlayer = "X";
-let gameState = Array(9).fill(null);
+let move = Array(9).fill(null);
 let gameActive = true;
 
 function attachEventListeners() {
@@ -84,8 +84,8 @@ function attachEventListeners() {
 }
 
 function handleClick(index) {
-  if (gameState[index] || !gameActive) return;
-  gameState[index] = currentPlayer;
+  if (move[index] || !gameActive) return;
+  move[index] = currentPlayer;
   document.getElementById(`sq${index}`).textContent = currentPlayer;
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
@@ -108,7 +108,7 @@ function checkGameState() {
 
   for (let condition of winConditions) {
     const [a, b, c] = condition;
-    if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+    if (move[a] && move[a] === move[b] && move[a] === move[c]) {
       gameActive = false;
       win = true;
       break;
@@ -117,14 +117,14 @@ function checkGameState() {
 
   if (win) {
     statusDiv.textContent = `Player ${currentPlayer === "X" ? "O" : "X"} Wins!`;
-  } else if (!gameState.includes(null)) {
+  } else if (!move.includes(null)) {
     gameActive = false;
     statusDiv.textContent = "Stalemate!";
   }
 }
 
 function restartGame() {
-  gameState.fill(null);
+  move.fill(null);
   gameActive = true;
   currentPlayer = "X";
   statusDiv.textContent = "Player's turn: X";
