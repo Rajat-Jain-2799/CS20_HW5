@@ -77,10 +77,10 @@ let gameState = Array(9).fill(null);
 let gameActive = true;
 
 function attachEventListeners() {
-  for (let i = 0; i < NUM_SQUARES; i++) {
-    const square = document.getElementById(`sq${i}`);
-    square.addEventListener('click', () => handleClick(i));
-  }
+  const squares = document.querySelectorAll('.square'); // Select all squares
+  squares.forEach((square, index) => { // Use forEach to iterate
+    square.addEventListener('click', () => handleClick(index));
+  });
 }
 
 function handleClick(index) {
