@@ -83,6 +83,7 @@
 const statusDiv = document.querySelector('.status');
 const restart = document.getElementById('restart');
 let currentPlayer = "X";
+//Array moves which stoes the moves of each square
 let move = Array(9).fill(null);
 let gameActive = true;
 
@@ -114,7 +115,7 @@ function checkGameState() {
       break;
     }
   }
-
+  //Checks if someone has one each time or if its a stalemate
   if (win) {
     statusDiv.textContent = `Player ${currentPlayer === "X" ? "O" : "X"} Wins!`;
   } else if (!move.includes(null)) {
