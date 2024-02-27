@@ -1,9 +1,19 @@
+<!--
+ *  Assignment: Tic Tac Toe
+ *  Rajat Jain
+ *  2-24-2024
+ *
+ *  CS 20 HW5
+ *
+ * This is the Tic tac toe final version index.html which displays ttt4.html
+ *
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tic Tac Toe - Simplified</title>
+<title>Tic Tac Toe</title>
 <style>
   .board {
     display: grid;
@@ -43,36 +53,34 @@ for (i = 0; i < NUM_SQUARES; i++) {
 </script>
 </div>
 <div class="status">Player's turn: X</div>
-<button id="startGame">Start Game</button> <!-- Added Start Game button -->
+<button id="startGame">Start Game</button> 
 <script>
 const statusDiv = document.querySelector('.status');
 const startGameBtn = document.getElementById('startGame');
 let currentPlayer;
 let gameState = Array(9).fill(null);
 
-// Function to randomly choose the starting player
+//This is function that randomly chooses a player
 function chooseStartingPlayer() {
   currentPlayer = Math.random() < 0.5 ? "X" : "O";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
 }
-
-// Modified restartGame function to also choose starting player
+//Function that restarts the game 
 function restartGame() {
   gameState.fill(null);
-  chooseStartingPlayer(); // Choose starting player randomly
+  chooseStartingPlayer();
   for (let i = 0; i < NUM_SQUARES; i++) {
     document.getElementById(`sq${i}`).textContent = '';
   }
 }
 
-// Attach event listeners to squares
 function attachEventListeners() {
   for (let i = 0; i < NUM_SQUARES; i++) {
     const square = document.getElementById(`sq${i}`);
-    square.onclick = function() { handleClick(i); }; // Using onclick for simplicity
+    square.onclick = function() { handleClick(i); }; 
   }
 }
-
+//Functiom that hadnles the click and add the value to the square 
 function handleClick(index) {
   if (gameState[index] || !currentPlayer) return;
   gameState[index] = currentPlayer;
@@ -84,12 +92,12 @@ function handleClick(index) {
 // Initialize game
 function initializeGame() {
   attachEventListeners();
-  chooseStartingPlayer(); // Randomly choose who starts
+  chooseStartingPlayer(); 
 }
 
 startGameBtn.addEventListener('click', restartGame);
 
-initializeGame(); // Start the game initially
+initializeGame();
 </script>
 </body>
 </html>
