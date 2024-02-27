@@ -58,7 +58,7 @@ for (i = 0; i < NUM_SQUARES; i++) {
 const statusDiv = document.querySelector('.status');
 const startGameBtn = document.getElementById('startGame');
 let currentPlayer;
-let gameState = Array(9).fill(null);
+let move = Array(9).fill(null);
 
 //This is function that randomly chooses a player
 function chooseStartingPlayer() {
@@ -67,7 +67,7 @@ function chooseStartingPlayer() {
 }
 //Function that restarts the game 
 function restartGame() {
-  gameState.fill(null);
+  move.fill(null);
   chooseStartingPlayer();
   for (let i = 0; i < NUM_SQUARES; i++) {
     document.getElementById(`sq${i}`).textContent = '';
@@ -82,8 +82,8 @@ function attachEventListeners() {
 }
 //Functiom that hadnles the click and add the value to the square 
 function handleClick(index) {
-  if (gameState[index] || !currentPlayer) return;
-  gameState[index] = currentPlayer;
+  if (move[index] || !currentPlayer) return;
+  move[index] = currentPlayer;
   document.getElementById(`sq${index}`).textContent = currentPlayer;
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   statusDiv.textContent = `Player's turn: ${currentPlayer}`;
