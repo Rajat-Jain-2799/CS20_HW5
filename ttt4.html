@@ -73,7 +73,7 @@
 const statusDiv = document.querySelector('.status');
 const restart = document.getElementById('restart');
 let currentPlayer = "X";
-let move = Array(9).fill(null);
+let move = Array(9).fill("-");
 let gameActive = true;
 
 function attachEventListeners() {
@@ -119,7 +119,7 @@ function restartGame() {
   currentPlayer = "X";
   statusDiv.textContent = "Player's turn: X";
   for (let i = 0; i < NUM_SQUARES; i++) {
-    document.getElementById(`sq${i}`).textContent = '';
+    document.getElementById(`sq${i}`).textContent = '-';
   }
 }
 
